@@ -45,8 +45,8 @@ console.log(slicedNum);
 let norm = [];
 
 for (let j = 0; j < slicedNum.length; j++) {
-	if (slicedNum[j] % 123 < 123) {
-		norm.push(slicedNum[j] % 123);
+	if (slicedNum[j] % 45 < 45) {
+		norm.push(slicedNum[j] % 45);
 	}
 }
 
