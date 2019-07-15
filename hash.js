@@ -113,51 +113,42 @@ let getRandom = () => {
 let arrP = [];
 let arrQ = [];
 
-let p = 127;
+let p = 10000;
 
 
 for (let i = 0; i < p; i++) {
   let y = i;
   for (let j = 0; j < p; j++) {
     let x = j;
-    if ((y * y) % 7 == (x * x * x - 7 * x + 10) % 7) {
+    if ((y * y) == (x * x * x - 7 * x + 10)) {
       arrP.push([x, y]);
-    }
-  }
-}
-
-console.log(arrP);
-
-
-for (let i = 0; i < p; i++) {
-  let y = i;
-  for (let j = 0; j < p; j++) {
-    let x = j;
-    if ((y * y) % 7 == (x * x * x - 7 * x + 10) % 7) {
       arrQ.push([x, y]);
     }
   }
 }
 
+let sum = (P, Q) => {
+  let m;
+  console.log(P);
+  console.log(Q);
 
-console.log(arrP[1409]);
-console.log(arrQ[1409]);
+  if (P[0] == Q[0] && P[1] == Q[1]) {
+    m = (3 * (P[0] * P[0]) + (-7)) / (2 * P[1]);
+  } else {
+    m = (P[1] - Q[1]) / (P[0] - Q[0]);
+  }
 
+  console.log(m);
 
-let m = (arrP[0][1] - arrQ[0][1]) / (arrP[0][0] - arrQ[0][0]);
+  let arrR = [];
 
-let mEqual = ((3 * (arrP[1409][0] * arrP[1409][0]) + (-7)) / (2 * arrP[1409][1]));
+  arrR[0] = (m * m - P[0] - Q[0]);
 
+  arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1));
 
-console.log(mEqual);
+  console.log(arrR);
+}
 
+console.log(arrP);
 
-let arrR = [];
-
-arrR[0] = [];
-
-arrR[0][0] = mEqual * mEqual - arrP[1409][0] - arrQ[1409][0];
-
-arrR[0][1] = (arrP[1409][1] + mEqual * (arrR[0][0] - arrP[1409][0])) * (-1);
-
-console.log(arrR);
+sum(arrP[3], arrQ[2]);
