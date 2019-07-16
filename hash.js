@@ -4,7 +4,7 @@
 // } else {
 // 	console.log('No web3? You should consider trying MetaMask!')
 // 	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-// 	web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+// 	web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:245"));
 // }
 
 // const blockHash = "0x93b6f00507e4d9254615e61ffb87d4c98e370938b3e2fc273457d314db6f8970";
@@ -70,17 +70,11 @@
 
 let randomsNumsArr = [];
 
-let getRandomArr = (arr) => {
-  console.log(arr);
-  return arr;
-}
-
 let getRandom = () => {
   let min = 1;
   let max = 45;
   let count = 6;
   let numsArr = [];
-
 
   let URL = `http://www.random.org/sequences/?min=${min}&max=${max}&col=1&format=plain&rnd=new`;
 
@@ -93,34 +87,68 @@ let getRandom = () => {
     numsArr = newText.split(' ');
     for (let i = 0; i < numsArr.length; i++) { numsArr[i] = +numsArr[i]; }
 
-    console.log(numsArr);
-
     numsArr.length = count;
 
-    randomsNumsArr = getRandomArr(numsArr);
+    console.log(numsArr.sort((a, b) => a - b));
   });
 }
 
 // getRandom();
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let devideModule = (a, b) => {
+  let rest = -a - (-a) % b;
+  let devider = rest / b + 1;
+  let trueRest = devider * b + a;
+  return trueRest;
+}
+
+
 
 let arrP = [];
 let arrQ = [];
 
-let p = 10000;
+let p = 19;
 
 
 for (let i = 0; i < p; i++) {
   let y = i;
   for (let j = 0; j < p; j++) {
     let x = j;
-    if ((y * y) == (x * x * x - 7 * x + 10)) {
+    if ((y * y) % p == (x * x * x - 7 * x + 10) % p) {
       arrP.push([x, y]);
       arrQ.push([x, y]);
     }
@@ -133,16 +161,21 @@ let sum = (P, Q) => {
   console.log(Q);
 
   if (P[0] == Q[0] && P[1] == Q[1]) {
-    m = (3 * (P[0] * P[0]) + (-7)) / (2 * P[1]);
+    m = ((3 * (P[0] * P[0]) + (-7)) / (2 * P[1]));
+    console.log('equal');
+    console.log(m);
   } else {
-    m = (P[1] - Q[1]) / (P[0] - Q[0]);
+    m = ((P[1] - Q[1]) / (P[0] - Q[0]));
+    console.log(' no equal');
+    console.log(m);
   }
-
-  console.log(m);
 
   let arrR = [];
 
-  arrR[0] = (m * m - P[0] - Q[0]);
+  arrR[0] = devideModule((m * m - P[0] - Q[0]), p);
+  // arrR[0] = 18;
+
+
 
   arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1));
 
@@ -151,4 +184,4 @@ let sum = (P, Q) => {
 
 console.log(arrP);
 
-sum(arrP[3], arrQ[2]);
+sum(arrP[20], arrQ[12]);
