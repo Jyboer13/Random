@@ -172,16 +172,19 @@ let sum = (P, Q) => {
 
   let arrR = [];
 
-  arrR[0] = devideModule((m * m - P[0] - Q[0]), p);
+  m < 0 ? arrR[0] = devideModule((m * m - P[0] - Q[0]), p) : (m * m - P[0] - Q[0]);
+
+  // arrR[0] = devideModule((m * m - P[0] - Q[0]), p);
   // arrR[0] = 18;
 
 
+  m < 0 ? arrR[1] = devideModule(((P[1] + m * (arrR[0] - P[0])) * (-1)), p) : ((P[1] + m * (arrR[0] - P[0])) * (-1));
 
-  arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1));
+  // arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1));
 
   console.log(arrR);
 }
 
 console.log(arrP);
 
-sum(arrP[20], arrQ[12]);
+sum(arrP[15], arrQ[12]);
