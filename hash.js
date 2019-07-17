@@ -129,17 +129,13 @@ let getRandom = () => {
 
 
 
-let devideModule = (a, b) => { // функция для определения остатка от деления при а < 0 && b > 0;
-
+let devideModule = (a, b) => {
   let rest = -a - (-a) % b;
   let devider = rest / b + 1;
   let trueRest = devider * b + a;
-  console.log(trueRest);
-  
+
   return trueRest;
 }
-
-devideModule(-2, 19);
 
 
 let arrP = [];
@@ -159,6 +155,10 @@ for (let i = 0; i < p; i++) {
   }
 }
 
+let isInt = (a) => a % 1 === 0;
+
+
+
 let sum = (P, Q) => {
   let m;
   console.log(P);
@@ -168,29 +168,36 @@ let sum = (P, Q) => {
     m = ((3 * (P[0] * P[0]) + (-7)) / (2 * P[1]));
     console.log('equal');
     console.log(m);
+    if (!isInt(m)) m = Math.round(m);
   } else {
-    ((P[1] - Q[1]) / (P[0] - Q[0])) < 0 ? m = devideModule(((P[1] - Q[1]) / (P[0] - Q[0])), p) : m = ((P[1] - Q[1]) / (P[0] - Q[0])) % p;
-    // m = devideModule(((P[1] - Q[1]) / (P[0] - Q[0])), p);
+    ((P[1] - Q[1]) / (P[0] - Q[0])) < 0 ? m = ((P[1] - Q[1]) / (P[0] - Q[0]) % p + p) : m = ((P[1] - Q[1]) / (P[0] - Q[0])) % p;
     console.log('no equal');
-    console.log(m);
-    console.log(((P[1] - Q[1]) / (P[0] - Q[0])));
+    if (!isInt(m)) m = Math.round(m);
+    // console.log(m);
+    // console.log((P[1] - Q[1]) / (P[0] - Q[0]));
   }
+
+  for (let i = 1; i <= p; i++) {
+    if (i % p == Math.round(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p)) % p) {
+      console.log(i);
+    }
+  }
+
+  console.log(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p));
+  console.log(Math.round(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p)));
+
 
   let arrR = [];
 
+  (m * m - P[0] - Q[0]) < 0 ? arrR[0] = (m * m - P[0] - Q[0]) % p + p : arrR[0] = (m * m - P[0] - Q[0]) % p;
 
-  (m * m - P[0] - Q[0]) < 0 ? arrR[0] = devideModule((m * m - P[0] - Q[0]), p) : arrR[0] = (m * m - P[0] - Q[0]) % p;
+  ((P[1] + m * (arrR[0] - P[0])) * (-1)) < 0 ? arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1)) % p + p : arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1)) % p;
 
-  // arrR[0] = devideModule((m * m - P[0] - Q[0]), p);
-  // arrR[0] = 18;
 
-  ((P[1] + m * (arrR[0] - P[0])) * (-1)) < 0 ? arrR[1] = devideModule(((P[1] + m * (arrR[0] - P[0])) * (-1)), p) : arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1)) % p;
-
-  // arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1));
 
   console.log(arrR);
 }
 
 console.log(arrP);
 
-sum(arrP[16], arrQ[19]);
+sum(arrP[17], arrQ[20]);
