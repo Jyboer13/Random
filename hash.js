@@ -127,8 +127,6 @@ let getRandom = () => {
 
 
 
-
-
 let devideModule = (a, b) => {
   let rest = -a - (-a) % b;
   let devider = rest / b + 1;
@@ -136,7 +134,7 @@ let devideModule = (a, b) => {
 
   return trueRest;
 }
-
+// console.log(devideModule(-2.333333333, 19));
 
 let arrP = [];
 let arrQ = [];
@@ -144,16 +142,16 @@ let arrQ = [];
 let p = 19;
 
 
-for (let i = 0; i < p; i++) {
-  let y = i;
-  for (let j = 0; j < p; j++) {
-    let x = j;
-    if ((y * y) % p == (x * x * x - 7 * x + 10) % p) {
-      arrP.push([x, y]);
-      arrQ.push([x, y]);
-    }
-  }
-}
+// for (let i = 0; i < p; i++) {
+//   let y = i;
+//   for (let j = 0; j < p; j++) {
+//     let x = j;
+//     if ((y * y) % p == (x * x * x - 7 * x + 10) % p) {
+//       arrP.push([x, y]);
+//       arrQ.push([x, y]);
+//     }
+//   }
+// }
 
 let isInt = (a) => a % 1 === 0;
 
@@ -173,23 +171,22 @@ let sum = (P, Q) => {
     ((P[1] - Q[1]) / (P[0] - Q[0])) < 0 ? m = ((P[1] - Q[1]) / (P[0] - Q[0]) % p + p) : m = ((P[1] - Q[1]) / (P[0] - Q[0])) % p;
     console.log('no equal');
     if (!isInt(m)) m = Math.round(m);
-    // console.log(m);
+    console.log(m);
     // console.log((P[1] - Q[1]) / (P[0] - Q[0]));
   }
 
-  for (let i = 1; i <= p; i++) {
-    if (i % p == Math.round(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p)) % p) {
-      console.log(i);
-    }
-  }
-
-  console.log(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p));
-  console.log(Math.round(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p)));
+  // console.log(((P[1] - Q[1]) / (P[0] - Q[0]) % p + p));
 
 
   let arrR = [];
 
+  console.log((m * m - P[0] - Q[0]));
+
+
   (m * m - P[0] - Q[0]) < 0 ? arrR[0] = (m * m - P[0] - Q[0]) % p + p : arrR[0] = (m * m - P[0] - Q[0]) % p;
+
+  console.log(((P[1] + m * (arrR[0] - P[0])) * (-1)));
+
 
   ((P[1] + m * (arrR[0] - P[0])) * (-1)) < 0 ? arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1)) % p + p : arrR[1] = ((P[1] + m * (arrR[0] - P[0])) * (-1)) % p;
 
@@ -198,6 +195,68 @@ let sum = (P, Q) => {
   console.log(arrR);
 }
 
-console.log(arrP);
+// console.log(arrP);
 
-sum(arrP[17], arrQ[20]);
+// sum(arrP[12], arrQ[20]);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+let Swap = (arr, index1, index2) => {
+  temp = arr[index1];
+  arr[index1] = arr[index2];
+  arr[index2] = temp;
+  return arr;
+}
+
+
+
+
+let S = new ArrayBuffer(256);
+let x = 0;
+let y = 0;
+
+
+
+
+let init = (key) => {
+  for (let i = 0; i < 256; i++) {
+    S[i] = i;
+  }
+
+  let j = 0;
+
+  for (let i = 0; i < 256; i++) {
+    j = (j + S[i] + key[i % key.length]) % 256;
+
+    S = Swap(S, i, j);
+  }
+  console.log(S);
+}
+
+let key = [];
+
+for (let i = 0; i < 256; i++) {
+  key[i] = i;
+}
+
+init(key);
+
+
+
+
+let keyIten = () => {
+  x = (x + 1) % 256;
+  y = (y + S[x]) % 256;
+
+  Swap(S, x, y);
+
+  return S[(S[x] + S[y]) % 256];
+}
